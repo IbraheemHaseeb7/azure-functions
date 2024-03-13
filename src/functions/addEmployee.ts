@@ -28,7 +28,7 @@ export async function addEmployee(
 }
 
 app.http("addEmployee", {
-    methods: ["POST", "PUT"],
+    methods: ["POST", "PATCH"],
     authLevel: "anonymous",
     extraOutputs: [sql],
     handler: addEmployee,
