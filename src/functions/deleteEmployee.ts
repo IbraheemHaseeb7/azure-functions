@@ -7,27 +7,29 @@ import {
 } from "@azure/functions";
 
 const sql = input.sql({
-    commandText: "SELECT * FROM dbo.Employees",
+    commandText: "DELETE FROM Employees where [employee_id]=@Id",
     commandType: "Text",
     connectionStringSetting: "SqlConnectionString",
+    parameters: "@Id={Query.id}",
 });
 
-export async function sqlServerConnection(
+export async function deleteEmployee(
     request: HttpRequest,
     context: InvocationContext
 ): Promise<HttpResponseInit> {
     try {
-        const result = context.extraInputs.get(sql);
-
-        return { status: 200, jsonBody: { data: result } };
+        context.extraInputs.get(sql);
+        return {
+            jsonBody: { message: `Successfully deleted Employee Record` },
+        };
     } catch (e: Error | any) {
-        return { status: 500, jsonBody: { message: e.message } };
+        return { jsonBody: e.message };
     }
 }
 
-app.http("sqlServerConnection", {
-    methods: ["GET"],
+app.http("deleteEmployee", {
+    methods: ["DELETE"],
     authLevel: "anonymous",
     extraInputs: [sql],
-    handler: sqlServerConnection,
+    handler: deleteEmployee,
 });
