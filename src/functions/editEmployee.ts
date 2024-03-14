@@ -20,7 +20,7 @@ export async function editEmployee(
         context.extraOutputs.set(sql, body);
 
         return {
-            jsonBody: { message: `Successfully editted new Employee Record` },
+            jsonBody: { message: `Successfully edited new Employee Record` },
         };
     } catch (e: Error | any) {
         return { jsonBody: e.message };

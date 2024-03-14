@@ -6,7 +6,7 @@ import {
     input,
 } from "@azure/functions";
 
-const sql = input.sql({
+const sqlall = input.sql({
     commandText: "SELECT * FROM dbo.Employees",
     commandType: "Text",
     connectionStringSetting: "SqlConnectionString",
@@ -17,18 +17,17 @@ export async function getAllEmployees(
     context: InvocationContext
 ): Promise<HttpResponseInit> {
     try {
-        const result = context.extraInputs.get(sql);
-
+        const result = context.extraInputs.get(sqlall);
         return { status: 200, jsonBody: { data: result } };
     } catch (e: Error | any) {
-        return { status: 500, jsonBody: { message: e.message } };
+        return { status: 200, jsonBody: { message: e.message } };
     }
 }
 
 app.http("getAllEmployees", {
     methods: ["GET"],
     authLevel: "anonymous",
-    extraInputs: [sql],
+    extraInputs: [sqlall],
     handler: getAllEmployees,
     route: "employees",
 });
