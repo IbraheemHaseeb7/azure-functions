@@ -32,5 +32,5 @@ app.http("addEmployee", {
     authLevel: "anonymous",
     extraOutputs: [sql],
     handler: addEmployee,
-    route: "employees",
+    route: "employees/add",
 });

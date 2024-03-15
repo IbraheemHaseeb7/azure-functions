@@ -29,5 +29,5 @@ app.http("getAllEmployees", {
     authLevel: "anonymous",
     extraInputs: [sqlall],
     handler: getAllEmployees,
-    route: "employees",
+    route: "employees/all",
 });

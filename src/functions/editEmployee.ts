@@ -32,5 +32,5 @@ app.http("editEmployee", {
     authLevel: "anonymous",
     extraOutputs: [sql],
     handler: editEmployee,
-    route: "employees",
+    route: "employees/edit",
 });
