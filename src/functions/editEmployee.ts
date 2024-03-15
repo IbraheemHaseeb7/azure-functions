@@ -23,7 +23,7 @@ export async function editEmployee(
             jsonBody: { message: `Successfully edited new Employee Record` },
         };
     } catch (e: Error | any) {
-        return { jsonBody: e.message };
+        return { status: 200, jsonBody: e.message };
     }
 }
 
